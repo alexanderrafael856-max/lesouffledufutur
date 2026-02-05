@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Souffle du Futur | Projet de Recherche Avancé</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --secondary: #7c3aed;
+      --neon-green: #22f3a6;
+      --glass: rgba(15, 23, 42, 0.9);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
+      color: var(--text);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0; width: 100%;
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.4rem;
+      background: linear-gradient(90deg, var(--accent), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    .nav-links { display: flex; align-items: center; }
+
+    .nav-links a {
+      color: var(--muted);
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .lang-btns { margin-left: 20px; display: inline-flex; gap: 5px; }
+    .lang-btns button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(148,163,184,0.2);
+      color: var(--text);
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.7rem;
+    }
+
+    section { padding: 100px 20px; max-width: 1100px; margin: auto; }
+
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 { font-size: clamp(3rem, 10vw, 5.5rem); line-height: 1; margin-bottom: 25px; }
+    .hero p { font-size: 1.3rem; color: var(--muted); max-width: 800px; margin-bottom: 40px; }
+
+    h2 { font-size: 2.8rem; margin-bottom: 40px; color: var(--accent); border-left: 5px solid var(--secondary); padding-left: 20px; }
+    h3 { font-size: 1.8rem; margin-top: 30px; margin-bottom: 15px; color: var(--neon-green); }
+
+    .content-block {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+    .theory-box {
+      background: rgba(124, 58, 237, 0.05);
+      border-radius: 16px;
+      padding: 25px;
+      border-left: 4px solid var(--secondary);
+      margin: 20px 0;
+    }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 25px; background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; }
+    th { text-align: left; background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 15px; }
+    td { padding: 15px; border-bottom: 1px solid rgba(148, 163, 184, 0.1); color: var(--muted); }
+
+    .team-photo-container { margin-top: 40px; border-radius: 30px; overflow: hidden; border: 2px solid var(--accent); }
+    .team-photo { width: 100%; display: block; }
+
+    footer { padding: 80px 20px; text-align: center; border-top: 1px solid rgba(148, 163, 184, 0.1); color: var(--muted); }
+
+    ul { list-style: none; margin-top: 15px; }
+    li { position: relative; padding-left: 25px; margin-bottom: 10px; }
+    li::before { content: "⚡"; position: absolute; left: 0; color: var(--neon-green); }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">LE SOUFFLE DU FUTUR</div>
+    <div class="nav-links">
+      <a href="#accueil" data-i18n="nav_home">Accueil</a>
+      <a href="#vision" data-i18n="nav_vision">Vision</a>
+      <a href="#recherche" data-i18n="nav_research">Recherche</a>
+      <a href="#technique" data-i18n="nav_tech">Technique</a>
+      <a href="#impact" data-i18n="nav_impact">Impact</a>
+      <a href="#equipe" data-i18n="nav_team">Équipe</a>
+      <div class="lang-btns">
+        <button onclick="setLang('fr')">FR</button>
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('es')">ES</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="accueil">
+  <h1 data-i18n="hero_title">Récolter l’invisible</h1>
+  <p data-i18n="hero_subtitle">Une étude approfondie sur la récupération de l'énergie cinétique anthropogénique pour une infrastructure routière autosuffisante.</p>
+  <div class="theory-box" style="max-width: 600px;">
+    <p data-i18n="hero_quote">"Rien ne se perd, rien ne se crée, tout se transforme." — Lavoisier</p>
+  </div>
+</section>
+
+<section id="vision">
+  <h2 data-i18n="nav_vision">Vision & Concept</h2>
+  <div class="content-block">
+    <h3 data-i18n="vis_subtitle">L'autoroute comme source d'énergie</h3>
+    <p data-i18n="vis_desc">Chaque jour, des millions de véhicules déplacent des masses d'air colossales à haute vitesse. Notre concept propose d'installer des micro-turbines éoliennes sur les murets centraux des autoroutes. Ces turbines captent le "vent artificiel" généré par le trafic pour produire une électricité décentralisée, propre et constante.</p>
+    
+  </div>
+</section>
+
+<section id="recherche">
+  <h2 data-i18n="nav_research">Recherche & Problématique</h2>
+  <div class="content-block">
+    <h3 data-i18n="res_1_t">Le constat environnemental</h3>
+    <p data-i18n="res_1_d">Actuellement, le secteur des transports est l'un des plus grands consommateurs d'énergie fossile. Cependant, une source d'énergie massive est ignorée : le déplacement d'air causé par les véhicules à haute vitesse. Sur une autoroute comme la 15 ou la 40 au Québec, le flux d'air constant représente un potentiel de plusieurs mégawatts par kilomètre.</p>
+    
+    <div class="grid">
+      <div class="theory-box">
+        <strong data-i18n="theory_betz_t">Limite de Betz</strong>
+        <p data-i18n="theory_betz_d">Aucune éolienne ne peut capturer plus de 59,3% de l'énergie cinétique du vent. Notre objectif est d'approcher un rendement de 35-40% en conditions réelles.</p>
+      </div>
+      <div class="theory-box">
+        <strong data-i18n="theory_turb_t">Turbulence routière</strong>
+        <p data-i18n="theory_turb_d">Contrairement au vent laminaire, le vent routier est chaotique. Cela justifie notre choix pour une turbine à axe vertical (VAWT).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="technique">
+  <h2 data-i18n="nav_tech">Détails Techniques</h2>
+  <div class="grid">
+    <div class="content-block">
+      <h3 data-i18n="tech_sav_t">Pourquoi la Turbine Savonius ?</h3>
+      
+
+[Image of Savonius vertical axis wind turbine diagram]
+
+      <p data-i18n="tech_sav_d">Le modèle Savonius fonctionne sur le principe de la traînée différentielle. Ses avantages pour notre projet :</p>
+      <ul>
+        <li data-i18n="tech_sav_l1">Démarrage à très faible vitesse de vent (Cut-in speed).</li>
+        <li data-i18n="tech_sav_l2">Fonctionnement silencieux (important pour les zones urbaines).</li>
+        <li data-i18n="tech_sav_l3">Maintenance simplifiée par le placement du générateur au sol.</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3 data-i18n="tech_mat_t">Ingénierie des Matériaux</h3>
+      <p data-i18n="tech_mat_d">La durabilité est au cœur de notre conception. Chaque pièce a été sélectionnée pour résister aux vibrations mécaniques et aux cycles thermiques extrêmes du Canada.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3 data-i18n="spec_title">Spécifications Industrielles</h3>
+    <table>
+      <tr><th data-i18n="th_comp">Composante</th><th data-i18n="th_mat">Matériau & Propriétés</th></tr>
+      <tr><td data-i18n="mat_1_c">Structure</td><td data-i18n="mat_1_m">ASTM A572 (Acier à haute limite élastique, résistance au froid)</td></tr>
+      <tr><td data-i18n="mat_2_c">Arbre central</td><td data-i18n="mat_2_m">Acier 4140 (Chrome-Molybdène) pour la torsion</td></tr>
+      <tr><td data-i18n="mat_3_c">Roulements</td><td data-i18n="mat_3_m">SKF étanches avec graisse basse température (-50°C)</td></tr>
+      <tr><td data-i18n="mat_4_c">Visserie</td><td data-i18n="mat_4_m">Acier inoxydable 316 (Anti-corrosion sels de déglaçage)</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="impact">
+  <h2 data-i18n="nav_impact">Analyse d'Impact</h2>
+  <div class="content-block">
+    <h3 data-i18n="imp_eco_t">Potentiel Socio-Économique</h3>
+    <p data-i18n="imp_eco_d">En installant une unité tous les 100 mètres sur les terre-pleins centraux, nous pourrions :</p>
+    <ul>
+      <li data-i18n="imp_l1">Alimenter l'éclairage LED des autoroutes de façon autonome.</li>
+      <li data-i18n="imp_l2">Fournir de l'énergie aux bornes de recharge d'urgence.</li>
+      <li data-i18n="imp_l3">Réduire les coûts de maintenance du réseau électrique public.</li>
+    </ul>
+  </div>
+  
+  <div class="grid">
+    <div class="theory-box">
+      <h4 data-i18n="imp_v_t">Application ferroviaire</h4>
+      <p data-i18n="imp_v_d">Le "piston effect" dans les tunnels de métro ou de train représente une densité énergétique encore plus élevée que sur les routes.</p>
+    </div>
+    <div class="theory-box">
+      <h4 data-i18n="imp_g_t">Pays en développement</h4>
+      <p data-i18n="imp_g_d">Une solution robuste et simple pour apporter de l'électricité aux villages situés le long des grands axes routiers sans infrastructures coûteuses.</p>
+    </div>
+  </div>
+</section>
+
+<section id="equipe">
+  <h2 data-i18n="nav_team">L'Équipe d'Innovation</h2>
+  <div class="grid">
+    <div style="flex: 1;">
+      <p data-i18n="team_intro">Ce projet est le fruit d'une collaboration entre deux étudiants passionnés par la physique et l'avenir de notre planète.</p>
+      <div class="team-photo-container">
+        <img src="Malik Mantville et Rafael Alexander Gutierrez Ruiz.jpg" alt="Équipe" class="team-photo">
+      </div>
+    </div>
+    <div>
+      <div class="content-block">
+        <h3>Malik Mantville</h3>
+        <p data-i18n="team_m">Spécialiste en dynamique des fluides et calculs de rendement. Malik a dirigé les simulations aérodynamiques pour optimiser la courbure des pales Savonius.</p>
+      </div>
+      <div class="content-block">
+        <h3>Rafael Alexander Gutierrez Ruiz</h3>
+        <p data-i18n="team_r">Expert en ingénierie mécanique et sélection des matériaux. Rafael a conçu la structure de soutien et le système de transmission d'énergie hybride.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 – Le Souffle du Futur | Projet de Fin d'Études Secondaires | Polyvalente Le Carrefour</p>
+</footer>
+
+<script>
+const translations = {
+  fr: {
+    nav_home: "Accueil", nav_vision: "Vision", nav_research: "Recherche", nav_tech: "Technique", nav_impact: "Impact", nav_team: "Équipe",
+    hero_title: "Récolter l’invisible", hero_subtitle: "Une étude approfondie sur la récupération de l'énergie cinétique anthropogénique pour une infrastructure routière autosuffisante.",
+    hero_quote: "\"Rien ne se perd, rien ne se crée, tout se transforme.\" — Lavoisier",
+    vis_subtitle: "L'autoroute comme source d'énergie", vis_desc: "Chaque jour, des millions de véhicules déplacent des masses d'air colossales à haute vitesse. Notre concept propose d'installer des micro-turbines éoliennes sur les murets centraux des autoroutes. Ces turbines captent le \"vent artificiel\" généré par le trafic pour produire une électricité décentralisée, propre et constante.",
+    res_1_t: "Le constat environnemental", res_1_d: "Actuellement, le secteur des transports est l'un des plus grands consommateurs d'énergie fossile. Cependant, une source d'énergie massive est ignorée : le déplacement d'air causé par les véhicules à haute vitesse.",
+    theory_betz_t: "Limite de Betz", theory_betz_d: "Aucune éolienne ne peut capturer plus de 59,3% de l'énergie du vent. Objectif : 35-40%.",
+    theory_turb_t: "Turbulence routière", theory_turb_d: "Le vent routier est chaotique. Cela justifie le choix d'une turbine à axe vertical (VAWT).",
+    tech_sav_t: "Pourquoi la Turbine Savonius ?", tech_sav_d: "Le modèle Savonius fonctionne sur le principe de la traînée différentielle. Ses avantages :",
+    tech_sav_l1: "Démarrage à très faible vitesse de vent.", tech_sav_l2: "Fonctionnement silencieux pour les zones urbaines.", tech_sav_l3: "Maintenance simplifiée (générateur au sol).",
+    tech_mat_t: "Ingénierie des Matériaux", tech_mat_d: "Chaque pièce a été sélectionnée pour résister aux vibrations et aux hivers québécois.",
+    spec_title: "Spécifications Industrielles", th_comp: "Composante", th_mat: "Matériau & Propriétés",
+    mat_1_c: "Structure", mat_1_m: "ASTM A572 (Acier haute limite élastique)",
+    mat_2_c: "Arbre central", mat_2_m: "Acier 4140 (Chrome-Molybdène)",
+    mat_3_c: "Roulements", mat_3_m: "SKF étanches basse température (-50°C)",
+    mat_4_c: "Visserie", mat_4_m: "Acier inoxydable 316 (Anti-corrosion)",
+    imp_eco_t: "Potentiel Socio-Économique", imp_eco_d: "En installant une unité tous les 100 mètres, nous pourrions :",
+    imp_l1: "Éclairage LED autonome.", imp_l2: "Bornes de recharge d'urgence.", imp_l3: "Réduction des coûts de réseau.",
+    imp_v_t: "Application ferroviaire", imp_v_d: "Le vent dans les tunnels de métro représente une densité énergétique extrême.",
+    imp_g_t: "Pays en développement", imp_g_d: "Solution simple pour électrifier des villages isolés le long des routes.",
+    team_intro: "Ce projet est le fruit d'une collaboration entre deux étudiants passionnés.",
+    team_m: "Spécialiste en dynamique des fluides. Malik a dirigé les simulations aérodynamiques.",
+    team_r: "Expert en ingénierie mécanique. Rafael a conçu la structure y la transmisión."
+  },
+  en: {
+    nav_home: "Home", nav_vision: "Vision", nav_research: "Research", nav_tech: "Tech", nav_impact: "Impact", nav_team: "Team",
+    hero_title: "Harvesting the Invisible", hero_subtitle: "An in-depth study on anthropogenic kinetic energy recovery for self-sufficient road infrastructure.",
+    hero_quote: "\"Nothing is lost, nothing is created, everything is transformed.\" — Lavoisier",
+    vis_subtitle: "The Highway as an Energy Source", vis_desc: "Every day, millions of vehicles displace colossal masses of air at high speed. Our concept proposes installing micro-wind turbines on highway central medians. These turbines capture the \"artificial wind\" generated by traffic to produce decentralized, clean, and constant electricity.",
+    res_1_t: "Environmental Assessment", res_1_d: "Transport is a major fossil fuel consumer. However, a massive energy source is ignored: air displacement from high-speed vehicles.",
+    theory_betz_t: "Betz's Limit", theory_betz_d: "No turbine can capture more than 59.3% of wind energy. Our goal: 35-40%.",
+    theory_turb_t: "Road Turbulence", theory_turb_d: "Road wind is chaotic. This justifies our Vertical Axis Wind Turbine (VAWT) choice.",
+    tech_sav_t: "Why Savonius?", tech_sav_d: "Savonius works on differential drag. Its advantages:",
+    tech_sav_l1: "Low cut-in wind speed.", tech_sav_l2: "Silent operation for urban areas.", tech_sav_l3: "Easy maintenance (ground-level generator).",
+    tech_mat_t: "Material Engineering", tech_mat_d: "Every part was selected to withstand vibrations and harsh Canadian winters.",
+    spec_title: "Industrial Specifications", th_comp: "Component", th_mat: "Material & Properties",
+    mat_1_c: "Structure", mat_1_m: "ASTM A572 (High-strength structural steel)",
+    mat_2_c: "Main shaft", mat_2_m: "4140 Chromoly Steel (Torsion resistant)",
+    mat_3_c: "Bearings", mat_3_m: "SKF low-temp sealed bearings (-50°C)",
+    mat_4_c: "Hardware", mat_4_m: "316 Stainless steel (Anti-corrosion salts)",
+    imp_eco_t: "Socio-Economic Potential", imp_eco_d: "By installing units every 100 meters, we could:",
+    imp_l1: "Autonomous LED lighting.", imp_l2: "Emergency charging stations.", imp_l3: "Reduced grid costs.",
+    imp_v_t: "Railway Application", imp_v_d: "Piston effect in subway tunnels offers even higher energy density.",
+    imp_g_t: "Developing Countries", imp_g_d: "Simple solution to electrify remote villages along highways.",
+    team_intro: "This project is the result of collaboration between two passionate students.",
+    team_m: "Fluid dynamics specialist. Malik led aerodynamic simulations.",
+    team_r: "Mechanical engineering expert. Rafael designed the structure and transmission."
+  },
+  es: {
+    nav_home: "Inicio", nav_vision: "Visión", nav_research: "Investigación", nav_tech: "Técnica", nav_impact: "Impacto", nav_team: "Equipo",
+    hero_title: "Cosechar lo invisible", hero_subtitle: "Estudio profundo sobre la recuperación de energía cinética antropogénica para infraestructuras autosuficientes.",
+    hero_quote: "\"Nada se pierde, nada se crea, todo se transforma.\" — Lavoisier",
+    vis_subtitle: "La autopista como fuente de energía", vis_desc: "Cada día, millones de vehículos desplazan masas colosales de aire a alta velocidad. Nuestro concepto propone instalar microturbinas eólicas en los muros centrales de las autopistas. Estas turbinas captan el \"viento artificial\" generado por el tráfico para producir electricidad descentralizada, limpia y constante.",
+    res_1_t: "Diagnóstico Ambiental", res_1_d: "El transporte es un gran consumidor de combustible. Sin embargo, se ignora una fuente masiva: el aire desplazado por vehículos.",
+    theory_betz_t: "Límite de Betz", theory_betz_d: "Ninguna turbina captura más del 59.3% del viento. Meta: 35-40%.",
+    theory_turb_t: "Turbulencia vial", theory_turb_d: "El viento vial es caótico. Por eso elegimos una turbina de eje vertical (VAWT).",
+    tech_sav_t: "¿Por qué Savonius?", tech_sav_d: "El modelo Savonius funciona por resistencia diferencial. Ventajas:",
+    tech_sav_l1: "Arranque con vientos muy bajos.", tech_sav_l2: "Funcionamiento silencioso para zonas urbanas.", tech_sav_l3: "Mantenimiento simple (generador al suelo).",
+    tech_mat_t: "Ingeniería de Materiales", tech_mat_d: "Piezas seleccionadas para resistir vibraciones e inviernos canadienses.",
+    spec_title: "Especificaciones Industriales", th_comp: "Componente", th_mat: "Material y Propiedades",
+    mat_1_c: "Estructura", mat_1_m: "ASTM A572 (Acero de alta resistencia)",
+    mat_2_c: "Eje central", mat_2_m: "Acero 4140 (Cromo-Molibdeno)",
+    mat_3_c: "Rodamientos", mat_3_m: "SKF sellados baja temperatura (-50°C)",
+    mat_4_c: "Tornillería", mat_4_m: "Acero inoxidable 316 (Anticorrosión)",
+    imp_eco_t: "Potencial Socioeconómico", imp_eco_d: "Instalando unidades cada 100 metros, podríamos:",
+    imp_l1: "Iluminación LED autónoma.", imp_l2: "Estaciones de carga de emergencia.", imp_l3: "Reducción de costos de red.",
+    imp_v_t: "Aplicación ferroviaria", imp_v_d: "El efecto pistón en túneles ofrece una densidad energética extrema.",
+    imp_g_t: "Países en desarrollo", imp_g_d: "Solución simple para electrificar pueblos aislados junto a carreteras.",
+    team_intro: "Este proyecto es fruto de la colaboración entre dos estudiantes apasionados.",
+    team_m: "Especialista en dinámica de fluidos. Malik dirigió las simulaciones.",
+    team_r: "Experto en ingeniería mecánica. Rafael diseñó la estructura y transmisión."
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+</script>
+
+</body>
+</html>
